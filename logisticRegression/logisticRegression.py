@@ -8,7 +8,6 @@ import numpy as np
 # gradient = (1/m) * ∑(y_pred - y) * x
 # weights = ∑weights - learning_rate * gradient
 
-#python code
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
@@ -25,22 +24,17 @@ def gradient_descent(X, y, weights, learning_rate, iterations):
     return weights
 
 
-data = {
-    'Maths': [80, 60, 90, 65, 75],
-    'Physics': [85, 20, 88, 30, 80],
-    'Admission': [1, 0, 1, 0, 1]
-}
-
-dataFrame = pd.DataFrame(data)
+dataFrame = pd.read_csv("studentsAdmission.csv")
 X = dataFrame.iloc[:, :-1].values
 y = dataFrame.iloc[:, -1].values
 
 weights = np.zeros(len(X[0]))
-
 learning_rate = 0.02
 iterations = 1000
 weights = gradient_descent(X, y, weights, learning_rate, iterations)
-newStudent = [75, 60]
+
+newStudent = [17,16,14]
+
 probabilite = predict_probability(newStudent, weights)
 admit = 1 if probabilite >= 0.5 else 0
 
